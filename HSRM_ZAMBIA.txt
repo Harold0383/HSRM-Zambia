@@ -1,0 +1,62 @@
+
+
+	SHOW databases;
+	CREATE database hsrm_zambia;
+	SHOW databases;
+	USE hsrm_zambia;
+
+	CREATE TABLE province(
+	p_id INT(15) not null auto_increment,
+	p_name VARCHAR(15) not null,
+	PRIMARY KEY (p_id)
+	);
+
+	CREATE TABLE district(
+	d_id INT(15) not null auto_increment,
+	d_name VARCHAR(15) not null,
+	PRIMARY KEY (d_id)
+	);
+
+	CREATE TABLE town(
+	t_id INT(15) not null auto_increment,
+	t_name VARCHAR(15) not null,
+	PRIMARY KEY (t_id)
+	);
+	
+	CREATE TABLE assign_province(
+	assign_id INT(15) not null auto_increment,
+	p_idd INT(15) not null,
+	d_idd INT(15) not null,
+	t_idd INT(15) not null,
+	PRIMARY KEY (assign_id),
+
+	FOREIGN KEY (p_idd)
+	REFERENCES province(p_id),
+	FOREIGN KEY (d_idd)
+	REFERENCES district(d_id),	
+	FOREIGN KEY (t_idd)
+	REFERENCES town(t_id)	
+	
+	);
+	
+	CREATE TABLE response(
+	response_id INT(15) not null auto_increment,
+	citizen_name VARCHAR(150) not null,
+	citizen_phone VARCHAR(150) not null,
+	citizen_address TEXT (150) not null,
+	Response TEXT (150)not null,
+	p_idd INT(15) not null,
+	d_idd INT(15) not null,
+	t_idd INT(15) not null,
+	date_time DATETIME,
+	PRIMARY KEY (response_id),
+	FOREIGN KEY (p_idd)
+	REFERENCES province(p_id),
+	FOREIGN KEY (d_idd)
+	REFERENCES district(d_id),
+	FOREIGN KEY (t_idd)
+	REFERENCES town(t_id)
+	);
+
+	
+	
